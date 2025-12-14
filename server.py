@@ -8,7 +8,7 @@ brainrots = []
 lock = threading.Lock()
 
 MAX_BRAINROTS = 100
-EXPIRATION_SECONDS = 300
+EXPIRATION_SECONDS = 40
 
 def clean_old():
     global brainrots
@@ -45,6 +45,7 @@ def add_brainrot():
         "displayValue": data["displayValue"],
         "jobId": data["jobId"],
         "value": data["value"],
+        "playerCount": data.get("playerCount", "?/8"),
         "timestamp": datetime.now().timestamp()
     }
     

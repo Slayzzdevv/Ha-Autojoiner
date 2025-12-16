@@ -192,6 +192,17 @@ def delete_brainrot(job_id):
 
 @app.route("/api/settings/<user_id>", methods=["GET"])
 def get_settings(user_id):
+    # Track user activity when loading settings
+    with activity_lock:
+        if user_id not in user_activity:
+            user_activity[user_id] = {}
+        user_activity[user_id]["last_seen"] = datetime.now().timestamp()
+        
+        # Get current settings if available
+        with settings_lock:
+            if user_id in user_settings:
+                user_activity[user_id]["settings"] = user_settings[user_id]
+    
     with settings_lock:
         settings = user_settings.get(user_id, {})
     return jsonify({"settings": settings})
@@ -217,6 +228,17 @@ def save_settings(user_id):
 # Endpoint for Lua to check for commands
 @app.route("/api/client/commands/<user_id>", methods=["GET"])
 def get_client_commands(user_id):
+    # Track user activity when checking for commands
+    with activity_lock:
+        if user_id not in user_activity:
+            user_activity[user_id] = {}
+        user_activity[user_id]["last_seen"] = datetime.now().timestamp()
+        
+        # Update settings if available
+        with settings_lock:
+            if user_id in user_settings:
+                user_activity[user_id]["settings"] = user_settings[user_id]
+    
     commands = []
     
     # Check for kick

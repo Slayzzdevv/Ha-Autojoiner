@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, send_from_directory
+from flask import Flask, jsonify, request
 from datetime import datetime
 import threading
 import os
@@ -22,11 +22,33 @@ EXPIRATION_SECONDS = 40
 user_settings = {}
 settings_lock = threading.Lock()
 
+authorized_hwids = []
+hwid_lock = threading.Lock()
+MAX_AUTHORIZED_HWIDS = 2
+
 def clean_old():
     global brainrots
     now = datetime.now().timestamp()
     with lock:
         brainrots = [b for b in brainrots if now - b.get("timestamp", 0) < EXPIRATION_SECONDS]
+
+@app.route("/api/verify-hwid", methods=["POST"])
+def verify_hwid():
+    data = request.get_json()
+    if not data or "hwid" not in data:
+        return jsonify({"error": "no hwid provided"}), 400
+    
+    hwid = data["hwid"]
+    
+    with hwid_lock:
+        if hwid in authorized_hwids:
+            return jsonify({"authorized": True, "message": "Access granted"})
+        
+        if len(authorized_hwids) < MAX_AUTHORIZED_HWIDS:
+            authorized_hwids.append(hwid)
+            return jsonify({"authorized": True, "message": "HWID added to authorized list"})
+        else:
+            return jsonify({"authorized": False, "message": "Maximum authorized HWIDs reached"}), 403
 
 @app.route("/", methods=["GET"])
 def home():

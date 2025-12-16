@@ -10,6 +10,9 @@ lock = threading.Lock()
 MAX_BRAINROTS = 100
 EXPIRATION_SECONDS = 40
 
+user_settings = {}
+settings_lock = threading.Lock()
+
 def clean_old():
     global brainrots
     now = datetime.now().timestamp()
@@ -76,6 +79,23 @@ def delete_brainrot(job_id):
     with lock:
         brainrots = [b for b in brainrots if b["jobId"] != job_id]
     return jsonify({"status": "deleted"})
+
+@app.route("/api/settings/<user_id>", methods=["GET"])
+def get_settings(user_id):
+    with settings_lock:
+        settings = user_settings.get(user_id, {})
+    return jsonify({"settings": settings})
+
+@app.route("/api/settings/<user_id>", methods=["POST"])
+def save_settings(user_id):
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "no data"}), 400
+    
+    with settings_lock:
+        user_settings[user_id] = data.get("settings", {})
+    
+    return jsonify({"status": "saved", "settings": user_settings[user_id]})
 
 if __name__ == "__main__":
     import os

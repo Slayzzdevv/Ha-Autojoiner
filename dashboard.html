@@ -13,38 +13,109 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f5f5f5;
-            color: #333;
+            background: #000000;
+            color: #ffffff;
             min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: #000000;
+        }
+
+        .login-box {
+            background: #1a1a1a;
+            padding: 40px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .login-box h1 {
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #fff;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 20px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #7c3aed;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: #7c3aed;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .login-btn:hover {
+            background: #6d28d9;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 14px;
+            margin-top: 10px;
+            text-align: center;
+            display: none;
+        }
+
+        .dashboard {
+            display: none;
             padding: 20px;
         }
 
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
         .header {
-            background: #fff;
+            background: #1a1a1a;
             padding: 24px 32px;
             border-radius: 8px;
             margin-bottom: 24px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-bottom: 3px solid #2563eb;
+            border: 1px solid #333;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 600;
-            margin-bottom: 16px;
-            color: #1f2937;
+            color: #fff;
         }
 
         .header-info {
             display: flex;
             align-items: center;
             gap: 12px;
-            color: #6b7280;
+            color: #a0a0a0;
             font-size: 14px;
         }
 
@@ -64,16 +135,15 @@
         }
 
         .stat-card {
-            background: #fff;
+            background: #1a1a1a;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-            border-left: 4px solid #2563eb;
+            border: 1px solid #333;
         }
 
         .stat-label {
             font-size: 12px;
-            color: #6b7280;
+            color: #a0a0a0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 8px;
@@ -82,13 +152,81 @@
         .stat-value {
             font-size: 28px;
             font-weight: 600;
-            color: #1f2937;
+            color: #7c3aed;
+        }
+
+        .categories {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+
+        .category-btn {
+            padding: 10px 20px;
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover {
+            background: #252525;
+            border-color: #444;
+        }
+
+        .category-btn.active {
+            background: #7c3aed;
+            border-color: #7c3aed;
+        }
+
+        .filters {
+            background: #1a1a1a;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 24px;
+            border: 1px solid #333;
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: #a0a0a0;
+        }
+
+        .filter-input {
+            padding: 8px 12px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #fff;
+            font-size: 14px;
+            width: 150px;
+        }
+
+        .filter-input:focus {
+            outline: none;
+            border-color: #7c3aed;
         }
 
         .table-container {
-            background: #fff;
+            background: #1a1a1a;
             border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            border: 1px solid #333;
             overflow: hidden;
         }
 
@@ -98,8 +236,8 @@
         }
 
         thead {
-            background: #f9fafb;
-            border-bottom: 2px solid #e5e7eb;
+            background: #0a0a0a;
+            border-bottom: 2px solid #333;
         }
 
         th {
@@ -107,20 +245,20 @@
             text-align: left;
             font-size: 12px;
             font-weight: 600;
-            color: #6b7280;
+            color: #a0a0a0;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
         td {
             padding: 16px;
-            border-bottom: 1px solid #e5e7eb;
+            border-bottom: 1px solid #222;
             font-size: 14px;
-            color: #1f2937;
+            color: #fff;
         }
 
         tbody tr:hover {
-            background: #f9fafb;
+            background: #252525;
         }
 
         tbody tr:last-child td {
@@ -129,12 +267,23 @@
 
         .name-cell {
             font-weight: 600;
-            color: #1f2937;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brainrot-image {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid #333;
         }
 
         .value-cell {
             font-weight: 600;
-            color: #2563eb;
+            color: #7c3aed;
         }
 
         .badge {
@@ -147,20 +296,20 @@
         }
 
         .badge-new {
-            background: #d1fae5;
-            color: #065f46;
+            background: #10b981;
+            color: #000;
         }
 
         .badge-age {
-            background: #f3f4f6;
-            color: #6b7280;
+            background: #333;
+            color: #a0a0a0;
         }
 
         .job-id {
             font-family: 'Courier New', monospace;
             font-size: 12px;
-            color: #6b7280;
-            background: #f3f4f6;
+            color: #a0a0a0;
+            background: #0a0a0a;
             padding: 4px 8px;
             border-radius: 4px;
         }
@@ -168,26 +317,54 @@
         .empty-state {
             text-align: center;
             padding: 60px 20px;
-            color: #6b7280;
+            color: #a0a0a0;
         }
 
         .empty-state h2 {
             font-size: 18px;
             margin-bottom: 8px;
-            color: #1f2937;
+            color: #fff;
         }
 
         .loading {
             text-align: center;
             padding: 40px;
-            color: #6b7280;
+            color: #a0a0a0;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ef4444;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: #dc2626;
         }
     </style>
 </head>
 <body>
-    <div class="container">
+    <div class="login-container" id="loginContainer">
+        <div class="login-box">
+            <h1>HA AutoJoiner</h1>
+            <input type="text" id="username" class="login-input" placeholder="Username" autocomplete="off">
+            <input type="password" id="password" class="login-input" placeholder="Password" autocomplete="off">
+            <button class="login-btn" onclick="handleLogin()">Login</button>
+            <div class="error-message" id="errorMessage">Invalid credentials</div>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboard">
         <div class="header">
-            <h1>HA AutoJoiner Dashboard</h1>
+            <div class="header-top">
+                <h1>HA AutoJoiner Dashboard</h1>
+                <button class="logout-btn" onclick="handleLogout()">Logout</button>
+            </div>
             <div class="header-info">
                 <span class="status-dot"></span>
                 <span id="status-text">En ligne - Mise à jour en temps réel</span>
@@ -209,6 +386,34 @@
             </div>
         </div>
 
+        <div class="categories">
+            <button class="category-btn active" onclick="setCategory('all')">Tous</button>
+            <button class="category-btn" onclick="setCategory('high')">High Value (200M+)</button>
+            <button class="category-btn" onclick="setCategory('medium')">Medium (50M-200M)</button>
+            <button class="category-btn" onclick="setCategory('low')">Low Value (<50M)</button>
+            <button class="category-btn" onclick="setCategory('new')">Nouveaux</button>
+            <button class="category-btn" onclick="setCategory('full')">Presque Pleins</button>
+            <button class="category-btn" onclick="setCategory('available')">Disponibles</button>
+        </div>
+
+        <div class="filters">
+            <div class="filter-group">
+                <label class="filter-label">Recherche:</label>
+                <input type="text" id="searchInput" class="filter-input" placeholder="Nom du brainrot..." oninput="applyFilters()">
+            </div>
+            <div class="filter-group">
+                <label class="filter-label">Tri:</label>
+                <select id="sortSelect" class="filter-input" onchange="applyFilters()">
+                    <option value="value-desc">Valeur ↓</option>
+                    <option value="value-asc">Valeur ↑</option>
+                    <option value="players-desc">Joueurs ↓</option>
+                    <option value="players-asc">Joueurs ↑</option>
+                    <option value="age-asc">Âge ↑</option>
+                    <option value="age-desc">Âge ↓</option>
+                </select>
+            </div>
+        </div>
+
         <div class="table-container">
             <div id="brainrots-container">
                 <div class="loading">Chargement des brainrots...</div>
@@ -220,6 +425,109 @@
         const API_URL = window.location.origin;
         let lastUpdate = null;
         let isAuthorized = false;
+        let currentCategory = 'all';
+        let allBrainrots = [];
+        let isLoggedIn = false;
+
+        function handleLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const errorMsg = document.getElementById('errorMessage');
+
+            if (username === 'Admin' && password === 'Slayz2029') {
+                isLoggedIn = true;
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                verifyAccess();
+            } else {
+                errorMsg.style.display = 'block';
+                setTimeout(() => {
+                    errorMsg.style.display = 'none';
+                }, 3000);
+            }
+        }
+
+        function handleLogout() {
+            isLoggedIn = false;
+            isAuthorized = false;
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('dashboard').style.display = 'none';
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        document.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && document.getElementById('loginContainer').style.display !== 'none') {
+                handleLogin();
+            }
+        });
+
+        function setCategory(category) {
+            currentCategory = category;
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            applyFilters();
+        }
+
+        function getCategoryFilter(brainrot) {
+            const value = brainrot.value || 0;
+            const age = Date.now() / 1000 - brainrot.timestamp;
+            const players = brainrot.playerCount || '0/8';
+            const currentPlayers = parseInt(players.split('/')[0]) || 0;
+            const maxPlayers = parseInt(players.split('/')[1]) || 8;
+
+            switch(currentCategory) {
+                case 'high': return value >= 200000000;
+                case 'medium': return value >= 50000000 && value < 200000000;
+                case 'low': return value < 50000000;
+                case 'new': return age < 5;
+                case 'full': return currentPlayers >= 6;
+                case 'available': return currentPlayers < 6;
+                default: return true;
+            }
+        }
+
+        function applyFilters() {
+            if (!isAuthorized) return;
+
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const sortOption = document.getElementById('sortSelect').value;
+
+            let filtered = allBrainrots.filter(b => {
+                const matchesCategory = getCategoryFilter(b);
+                const matchesSearch = b.name.toLowerCase().includes(searchTerm);
+                return matchesCategory && matchesSearch;
+            });
+
+            const [sortField, sortOrder] = sortOption.split('-');
+            
+            filtered.sort((a, b) => {
+                let aVal, bVal;
+                
+                if (sortField === 'value') {
+                    aVal = a.value || 0;
+                    bVal = b.value || 0;
+                } else if (sortField === 'players') {
+                    const aPlayers = parseInt((a.playerCount || '0/8').split('/')[0]) || 0;
+                    const bPlayers = parseInt((b.playerCount || '0/8').split('/')[0]) || 0;
+                    aVal = aPlayers;
+                    bVal = bPlayers;
+                } else if (sortField === 'age') {
+                    aVal = a.timestamp || 0;
+                    bVal = b.timestamp || 0;
+                }
+                
+                if (sortOrder === 'desc') {
+                    return bVal - aVal;
+                } else {
+                    return aVal - bVal;
+                }
+            });
+
+            displayBrainrots(filtered);
+        }
 
         function generateHWID() {
             const canvas = document.createElement('canvas');
@@ -258,6 +566,8 @@
         }
 
         function verifyAccess() {
+            if (!isLoggedIn) return;
+
             let hwid = getStoredHWID();
             if (!hwid) {
                 hwid = generateHWID();
@@ -275,7 +585,6 @@
             .then(data => {
                 if (data.authorized) {
                     isAuthorized = true;
-                    document.body.style.display = 'block';
                     updateDashboard();
                     setInterval(updateDashboard, 1000);
                 } else {
@@ -289,13 +598,10 @@
         }
 
         function showAccessDenied() {
-            document.body.innerHTML = `
-                <div style="display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; padding: 20px; background: #f5f5f5;">
-                    <div style="background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
-                        <h1 style="font-size: 32px; margin-bottom: 16px; color: #ef4444;">Accès Refusé</h1>
-                        <p style="font-size: 16px; color: #6b7280; margin-bottom: 8px;">Vous n'êtes pas autorisé à accéder à ce dashboard.</p>
-                        <p style="font-size: 14px; color: #9ca3af;">Seuls les 2 premiers appareils peuvent accéder.</p>
-                    </div>
+            document.getElementById('brainrots-container').innerHTML = `
+                <div class="empty-state">
+                    <h2>Accès Refusé</h2>
+                    <p>Vous n'êtes pas autorisé à accéder à ce dashboard.</p>
                 </div>
             `;
         }
@@ -322,19 +628,67 @@
             return (now - timestamp) < 5;
         }
 
+        function displayBrainrots(brainrots) {
+            const container = document.getElementById('brainrots-container');
+
+            if (brainrots.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <h2>Aucun brainrot trouvé</h2>
+                        <p>Essayez de changer les filtres ou la catégorie</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = `
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Valeur</th>
+                                <th>Joueurs</th>
+                                <th>Job ID</th>
+                                <th>Âge</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${brainrots.map(b => {
+                                const age = formatAge(b.timestamp);
+                                const isNewBrainrot = isNew(b.timestamp);
+                                const imageHtml = b.imageUrl ? `<img src="${b.imageUrl}" alt="${b.name}" class="brainrot-image" onerror="this.style.display='none'">` : '';
+                                return `
+                                    <tr>
+                                        <td class="name-cell">
+                                            ${imageHtml}
+                                            <div>
+                                                ${isNewBrainrot ? '<span class="badge badge-new">NEW</span> ' : ''}
+                                                ${b.name}
+                                            </div>
+                                        </td>
+                                        <td class="value-cell">$${b.displayValue}/s</td>
+                                        <td>${b.playerCount || '?/8'}</td>
+                                        <td><span class="job-id">${b.jobId}</span></td>
+                                        <td><span class="badge badge-age">${age}</span></td>
+                                    </tr>
+                                `;
+                            }).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+        }
+
         function updateDashboard() {
-            if (!isAuthorized) return;
+            if (!isAuthorized || !isLoggedIn) return;
             
             fetch(`${API_URL}/api/brainrots`)
                 .then(response => response.json())
                 .then(data => {
-                    const container = document.getElementById('brainrots-container');
-                    const brainrots = data.brainrots || [];
+                    allBrainrots = data.brainrots || [];
 
-                    document.getElementById('total-count').textContent = brainrots.length;
+                    document.getElementById('total-count').textContent = allBrainrots.length;
                     
-                    if (brainrots.length > 0) {
-                        const best = brainrots[0];
+                    if (allBrainrots.length > 0) {
+                        const best = allBrainrots[0];
                         document.getElementById('best-value').textContent = '$' + formatValue(best.value) + '/s';
                     } else {
                         document.getElementById('best-value').textContent = '0M/s';
@@ -344,47 +698,7 @@
                     document.getElementById('last-update').textContent = 
                         now.toLocaleTimeString('fr-FR');
 
-                    if (brainrots.length === 0) {
-                        container.innerHTML = `
-                            <div class="empty-state">
-                                <h2>Aucun brainrot détecté</h2>
-                                <p>En attente de nouvelles détections...</p>
-                            </div>
-                        `;
-                    } else {
-                        container.innerHTML = `
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Nom</th>
-                                        <th>Valeur</th>
-                                        <th>Joueurs</th>
-                                        <th>Job ID</th>
-                                        <th>Âge</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${brainrots.map(b => {
-                                        const age = formatAge(b.timestamp);
-                                        const isNewBrainrot = isNew(b.timestamp);
-                                        return `
-                                            <tr>
-                                                <td class="name-cell">
-                                                    ${isNewBrainrot ? '<span class="badge badge-new">NEW</span> ' : ''}
-                                                    ${b.name}
-                                                </td>
-                                                <td class="value-cell">$${b.displayValue}/s</td>
-                                                <td>${b.playerCount || '?/8'}</td>
-                                                <td><span class="job-id">${b.jobId}</span></td>
-                                                <td><span class="badge badge-age">${age}</span></td>
-                                            </tr>
-                                        `;
-                                    }).join('')}
-                                </tbody>
-                            </table>
-                        `;
-                    }
-
+                    applyFilters();
                     lastUpdate = Date.now();
                 })
                 .catch(error => {
@@ -392,9 +706,6 @@
                     document.getElementById('status-text').textContent = 'Erreur de connexion';
                 });
         }
-
-        document.body.style.display = 'none';
-        verifyAccess();
     </script>
 </body>
 </html>

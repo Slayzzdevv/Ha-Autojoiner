@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from datetime import datetime
 import threading
 import os
+import json
 
 def read_dashboard():
     try:
@@ -22,9 +23,32 @@ EXPIRATION_SECONDS = 40
 user_settings = {}
 settings_lock = threading.Lock()
 
+HWID_FILE = "authorized_hwids.json"
 authorized_hwids = []
 hwid_lock = threading.Lock()
 MAX_AUTHORIZED_HWIDS = 2
+
+def load_authorized_hwids():
+    global authorized_hwids
+    try:
+        if os.path.exists(HWID_FILE):
+            with open(HWID_FILE, 'r') as f:
+                data = json.load(f)
+                authorized_hwids = data.get('hwids', [])
+                print(f"Loaded {len(authorized_hwids)} authorized HWIDs from file")
+    except Exception as e:
+        print(f"Error loading HWIDs: {e}")
+        authorized_hwids = []
+
+def save_authorized_hwids():
+    try:
+        with open(HWID_FILE, 'w') as f:
+            json.dump({'hwids': authorized_hwids}, f)
+        print(f"Saved {len(authorized_hwids)} authorized HWIDs to file")
+    except Exception as e:
+        print(f"Error saving HWIDs: {e}")
+
+load_authorized_hwids()
 
 def clean_old():
     global brainrots
@@ -46,6 +70,7 @@ def verify_hwid():
         
         if len(authorized_hwids) < MAX_AUTHORIZED_HWIDS:
             authorized_hwids.append(hwid)
+            save_authorized_hwids()
             return jsonify({"authorized": True, "message": "HWID added to authorized list"})
         else:
             return jsonify({"authorized": False, "message": "Maximum authorized HWIDs reached"}), 403

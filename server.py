@@ -131,6 +131,7 @@ def add_brainrot():
         "jobId": data["jobId"],
         "value": data["value"],
         "playerCount": data.get("playerCount", "?/8"),
+        "imageUrl": data.get("imageUrl"),
         "timestamp": datetime.now().timestamp()
     }
     

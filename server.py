@@ -1,6 +1,15 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from datetime import datetime
 import threading
+import os
+
+def read_dashboard():
+    try:
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "dashboard.html")
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return f.read()
+    except:
+        return None
 
 app = Flask(__name__)
 
@@ -21,6 +30,32 @@ def clean_old():
 
 @app.route("/", methods=["GET"])
 def home():
+    dashboard_html = read_dashboard()
+    if dashboard_html:
+        return dashboard_html
+    else:
+        return """
+        <html>
+        <head><title>HA AutoJoiner API</title></head>
+        <body style="font-family: Arial; padding: 40px; background: #0d0d12; color: #fff;">
+            <h1>🧠 HA AutoJoiner API</h1>
+            <p>API Status: Online</p>
+            <p>Brainrots: <a href="/api/brainrots" style="color: #7c3aed;">/api/brainrots</a></p>
+            <p>Dashboard: <a href="/dashboard.html" style="color: #7c3aed;">/dashboard.html</a></p>
+        </body>
+        </html>
+        """
+
+@app.route("/dashboard.html", methods=["GET"])
+def dashboard():
+    dashboard_html = read_dashboard()
+    if dashboard_html:
+        return dashboard_html
+    else:
+        return "Dashboard not found", 404
+
+@app.route("/api/status", methods=["GET"])
+def status():
     return jsonify({"status": "online", "brainrots": len(brainrots)})
 
 @app.route("/api/brainrots", methods=["GET"])
@@ -98,7 +133,6 @@ def save_settings(user_id):
     return jsonify({"status": "saved", "settings": user_settings[user_id]})
 
 if __name__ == "__main__":
-    import os
     port = int(os.environ.get("PORT", 5000))
     app.run(host="0.0.0.0", port=port)
 
